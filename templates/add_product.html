@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - Add Product</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px;
+        }
+
+        .container {
+            width: 600px;
+
+            background: #f8f5ff;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,.25);
+        }
+
+        .logo-section {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 45px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            color: #283f9f;
+        }
+
+        .tagline {
+            margin-top: 6px;
+
+            font-size: 13px;
+
+            letter-spacing: 3px;
+
+            color: #7650c7;
+        }
+
+        h1 {
+            text-align: center;
+
+            color: #4b3f72;
+
+            font-size: 30px;
+
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+
+            color: #4b3f72;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #c9c0e8;
+
+            border-radius: 8px;
+
+            background: white;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #667eea;
+        }
+
+        textarea {
+            height: 100px;
+
+            resize: vertical;
+        }
+
+        .button {
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 10px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+
+            opacity: .9;
+        }
+
+        .back-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #5b4bb7;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo-section">
+
+        <div class="brand-name">
+            ShopEase
+        </div>
+
+        <div class="tagline">
+            Shop More • Worry Less
+        </div>
+
+    </div>
+
+    <h1>➕ Add New Product</h1>
+
+    <form method="POST">
+
+        <div class="form-group">
+
+            <label>Product Name</label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter product name"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Description</label>
+
+            <textarea
+                name="description"
+                placeholder="Enter product description"
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Price</label>
+
+            <input
+                type="number"
+                name="price"
+                step="0.01"
+                placeholder="Enter price"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Category</label>
+
+            <input
+                type="text"
+                name="category"
+                placeholder="Example: Fashion"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Image URL</label>
+
+            <input
+                type="url"
+                name="image_url"
+                placeholder="Paste product image URL"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Stock</label>
+
+            <input
+                type="number"
+                name="stock"
+                min="0"
+                placeholder="Enter stock quantity"
+                required
+            >
+
+        </div>
+
+
+        <button type="submit" class="button">
+            ➕ Add Product
+        </button>
+
+    </form>
+
+
+    <a href="/admin" class="back-link">
+        ← Back to Admin Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>

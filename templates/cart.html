@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - My Cart</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+        }
+
+        .cart-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            background: #f1edff;
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #4b3f72;
+            text-align: center;
+        }
+
+        .cart-item {
+            background: #f8f5ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .cart-item h2 {
+            color: #4b3f72;
+            margin-top: 0;
+        }
+
+        .price {
+            color: #444;
+            font-size: 16px;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 18px 0;
+        }
+
+        .quantity a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: #e5ddff;
+            color: #5b4bb7;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .quantity a:hover {
+            background: #d8ceff;
+        }
+
+        .quantity-number {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .item-total {
+            font-size: 19px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .remove {
+            color: #d9534f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .remove:hover {
+            text-decoration: underline;
+        }
+
+        .checkout {
+            display: block;
+            text-align: center;
+            padding: 14px;
+            margin-top: 25px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .checkout:hover {
+            opacity: 0.9;
+        }
+
+        .empty-cart {
+            background: #f8f5ff;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: #555;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .bottom-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .bottom-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 12px;
+        }
+
+        .bottom-links a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="cart-container">
+
+        <div class="header">
+            <h1>🛒 My Shopping Cart</h1>
+        </div>
+
+
+        {% if cart_items %}
+
+            {% for item in cart_items %}
+
+                <div class="cart-item">
+
+                    <h2>{{ item[1] }}</h2>
+
+                    <p class="price">
+                        Price: ₹{{ item[2] }}
+                    </p>
+
+                    <div class="quantity">
+
+                        <span>Quantity:</span>
+
+                        <a href="/decrease-cart/{{ item[0] }}">
+                            −
+                        </a>
+
+                        <span class="quantity-number">
+                            {{ item[3] }}
+                        </span>
+
+                        <a href="/increase-cart/{{ item[0] }}">
+                            +
+                        </a>
+
+                    </div>
+
+                    <p class="item-total">
+                        Total: ₹{{ item[4] }}
+                    </p>
+
+                    <a
+                        href="/remove-from-cart/{{ item[0] }}"
+                        class="remove"
+                    >
+                        Remove from Cart
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+
+            <a href="/checkout" class="checkout">
+                Proceed to Checkout
+            </a>
+
+
+        {% else %}
+
+            <div class="empty-cart">
+
+                <h2>Your cart is empty 🛒</h2>
+
+                <p>Add some products to your cart and start shopping!</p>
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="bottom-links">
+
+            <a href="/products">
+                Continue Shopping
+            </a>
+
+            <a href="/my-orders">
+                My Orders
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

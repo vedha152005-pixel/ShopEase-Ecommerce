@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - Admin Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .admin-container {
+            width: 650px;
+            background: #f8f5ff;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        /* =========================
+           BRAND
+           ========================= */
+
+        .logo-section {
+            margin-bottom: 30px;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 48px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #283f9f;
+        }
+
+        .tagline {
+            margin-top: 6px;
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: #7650c7;
+        }
+
+        /* =========================
+           HEADING
+           ========================= */
+
+        h1 {
+            color: #4b3f72;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text {
+            color: #666;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           MANAGEMENT SECTION
+           ========================= */
+
+        .section-title {
+            color: #4b3f72;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           BUTTONS
+           ========================= */
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* =========================
+           LOGOUT
+           ========================= */
+
+        .logout {
+            margin-top: 25px;
+        }
+
+        .logout a {
+            color: #d9534f;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .logout a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- SHOP EASE BRAND -->
+
+        <div class="logo-section">
+
+            <div class="brand-name">
+                ShopEase
+            </div>
+
+            <div class="tagline">
+                Shop More • Worry Less
+            </div>
+
+        </div>
+
+
+        <!-- ADMIN WELCOME -->
+
+        <h1>
+            Admin Dashboard
+        </h1>
+
+        <h2>
+            Welcome, {{ name }}!
+        </h2>
+
+        <p class="welcome-text">
+            You are logged in as an Administrator.
+        </p>
+
+
+        <!-- PRODUCT MANAGEMENT -->
+
+        <h3 class="section-title">
+            Product Management
+        </h3>
+
+        <p class="description">
+            Add, edit and manage products from here.
+        </p>
+
+
+        <!-- MENU -->
+
+        <div class="menu">
+
+            <a href="/add-product">
+                ➕ Add Product
+            </a>
+
+            <a href="/products">
+                🛍️ View Products
+            </a>
+
+            <a href="/admin-orders">
+                📦 Manage Orders
+            </a>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <div class="logout">
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

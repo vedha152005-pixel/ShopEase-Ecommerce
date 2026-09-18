@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - Checkout</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+        }
+
+        .checkout-container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .header {
+            background: #f1edff;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #4b3f72;
+        }
+
+        .summary {
+            background: #f8f5ff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .summary h2 {
+            color: #4b3f72;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .product-item {
+            padding: 18px;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .product-item h3 {
+            margin-top: 0;
+            color: #4b3f72;
+        }
+
+        .product-item p {
+            color: #555;
+            margin: 8px 0;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-align: right;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .place-order:hover {
+            opacity: 0.9;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="checkout-container">
+
+        <div class="header">
+            <h1>🛍️ ShopEase Checkout</h1>
+        </div>
+
+
+        <div class="summary">
+
+            <h2>Order Summary</h2>
+
+
+            {% if cart_items %}
+
+                {% for item in cart_items %}
+
+                    <div class="product-item">
+
+                        <h3>
+                            {{ item[0] }}
+                        </h3>
+
+                        <p>
+                            Price: ₹{{ item[1] }}
+                        </p>
+
+                        <p>
+                            Quantity: {{ item[2] }}
+                        </p>
+
+                        <p>
+                            Total: ₹{{ item[3] }}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+
+                <form method="POST" action="/place-order">
+
+                    <button type="submit" class="place-order">
+                        ✓ Place Order
+                    </button>
+
+                </form>
+
+
+            {% else %}
+
+                <div class="empty-cart">
+
+                    <h2>Your cart is empty 🛒</h2>
+
+                    <p>Please add products before checking out.</p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <a href="/cart" class="back-link">
+            ← Back to Cart
+        </a>
+
+    </div>
+
+</body>
+
+</html>

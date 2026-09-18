@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - Product Added</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px;
+        }
+
+        .container {
+            width: 560px;
+
+            background: #f8f5ff;
+
+            padding: 45px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.25);
+
+            text-align: center;
+        }
+
+        .logo-section {
+            margin-bottom: 30px;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 48px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            color: #283f9f;
+        }
+
+        .tagline {
+            margin-top: 6px;
+
+            font-size: 13px;
+
+            letter-spacing: 3px;
+
+            color: #7650c7;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+
+            margin: 10px auto 20px;
+
+            background: #e6f7ed;
+
+            border: 2px solid #b7e4c7;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 42px;
+        }
+
+        h1 {
+            color: #4b3f72;
+
+            font-size: 30px;
+
+            margin-bottom: 12px;
+        }
+
+        .message {
+            color: #666;
+
+            font-size: 16px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+        .buttons a {
+            display: block;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        .buttons a:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.9;
+        }
+
+        .secondary {
+            background: #e5ddff !important;
+
+            color: #5b4bb7 !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo-section">
+
+        <div class="brand-name">
+            ShopEase
+        </div>
+
+        <div class="tagline">
+            Shop More • Worry Less
+        </div>
+
+    </div>
+
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+
+    <h1>
+        Product Added Successfully
+    </h1>
+
+
+    <p class="message">
+        Your product has been successfully added
+        to the ShopEase product list.
+    </p>
+
+
+    <div class="buttons">
+
+        <a href="/add-product">
+            ➕ Add Another Product
+        </a>
+
+        <a href="/products">
+            🛍️ View Products
+        </a>
+
+        <a href="/admin" class="secondary">
+            ← Back to Admin Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

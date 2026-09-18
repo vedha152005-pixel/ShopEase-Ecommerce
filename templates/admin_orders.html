@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>ShopEase - Admin Orders</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+        }
+
+        .page-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .header {
+            background: #f1edff;
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.18);
+            text-align: center;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 42px;
+            font-weight: bold;
+            color: #283f9f;
+        }
+
+        .tagline {
+            margin-top: 6px;
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #7650c7;
+        }
+
+        .header h1 {
+            color: #4b3f72;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .order-card {
+            background: #f8f5ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.18);
+        }
+
+        .order-card h2 {
+            color: #4b3f72;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .order-info {
+            background: #eee9ff;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .order-info p {
+            margin: 9px 0;
+            color: #444;
+            font-size: 16px;
+        }
+
+        .status {
+            display: inline-block;
+            background: #e1d8ff;
+            color: #5b4bb7;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .update-section {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .update-section label {
+            color: #4b3f72;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 10px;
+            border: 1px solid #c9c0e8;
+            border-radius: 7px;
+            background: white;
+            font-size: 15px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 7px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .bottom-links {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .bottom-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 12px;
+        }
+
+        .bottom-links a:hover {
+            text-decoration: underline;
+        }
+
+        .empty-message {
+            background: #f8f5ff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: #666;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <div class="header">
+
+        <div class="brand-name">ShopEase</div>
+
+        <div class="tagline">
+            Shop More • Worry Less
+        </div>
+
+        <h1>All Customer Orders</h1>
+
+        <p>Manage and update customer orders</p>
+
+    </div>
+
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <h2>📦 Order ID: {{ order[0] }}</h2>
+
+            <div class="order-info">
+
+                <p>
+                    <strong>Customer Name:</strong>
+                    {{ order[1] }}
+                </p>
+
+                <p>
+                    <strong>Customer Email:</strong>
+                    {{ order[2] }}
+                </p>
+
+                <p>
+                    <strong>Total Amount:</strong>
+                    ₹{{ order[3] }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status">
+                        {{ order[4] }}
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Order Date:</strong>
+                    {{ order[5] }}
+                </p>
+
+            </div>
+
+
+            <div class="update-section">
+
+                <form method="POST"
+                      action="/update-order-status/{{ order[0] }}">
+
+                    <label>
+                        Update Status:
+                    </label>
+
+                    <select name="status">
+
+                        <option value="PLACED"
+                            {% if order[4] == "PLACED" %}selected{% endif %}>
+                            PLACED
+                        </option>
+
+                        <option value="PROCESSING"
+                            {% if order[4] == "PROCESSING" %}selected{% endif %}>
+                            PROCESSING
+                        </option>
+
+                        <option value="SHIPPED"
+                            {% if order[4] == "SHIPPED" %}selected{% endif %}>
+                            SHIPPED
+                        </option>
+
+                        <option value="DELIVERED"
+                            {% if order[4] == "DELIVERED" %}selected{% endif %}>
+                            DELIVERED
+                        </option>
+
+                    </select>
+
+                    <button type="submit">
+                        Update Status
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-message">
+            <h2>No orders available.</h2>
+            <p>Customer orders will appear here.</p>
+        </div>
+
+    {% endif %}
+
+
+    <div class="bottom-links">
+
+        <a href="/products">🛍️ View Products</a>
+
+        <a href="/admin">🏠 Admin Dashboard</a>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

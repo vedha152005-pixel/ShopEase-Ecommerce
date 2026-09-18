@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - My Orders</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+        }
+
+        .orders-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            background: #f1edff;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #4b3f72;
+        }
+
+        .order-card {
+            background: #f8f5ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .order-card h2 {
+            color: #4b3f72;
+            margin-top: 0;
+        }
+
+        .order-info {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: #e5ddff;
+            color: #5b4bb7;
+            font-weight: bold;
+        }
+
+        .details {
+            display: inline-block;
+            margin-top: 12px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .details:hover {
+            text-decoration: underline;
+        }
+
+        .tracking {
+            margin-top: 22px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .tracking h3 {
+            color: #4b3f72;
+            margin-top: 0;
+        }
+
+        .tracking p {
+            margin: 9px 0;
+            color: #555;
+        }
+
+        .empty-orders {
+            background: #f8f5ff;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: #555;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .bottom-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .bottom-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 12px;
+        }
+
+        .bottom-links a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="orders-container">
+
+        <div class="header">
+            <h1>📦 My Orders</h1>
+        </div>
+
+
+        {% if orders %}
+
+            {% for order in orders %}
+
+                <div class="order-card">
+
+                    <h2>
+                        Order ID: {{ order[0] }}
+                    </h2>
+
+                    <p class="order-info">
+                        <strong>Total Amount:</strong>
+                        ₹{{ order[1] }}
+                    </p>
+
+                    <p class="order-info">
+                        <strong>Status:</strong>
+                        <span class="status">
+                            {{ order[2] }}
+                        </span>
+                    </p>
+
+                    <a
+                        href="/order-details/{{ order[0] }}"
+                        class="details"
+                    >
+                        View Order Details →
+                    </a>
+
+
+                    <div class="tracking">
+
+                        <h3>Order Tracking</h3>
+
+
+                        {% if order[2] == "PLACED" %}
+
+                            <p>✓ PLACED</p>
+                            <p>→ PROCESSING</p>
+                            <p>→ SHIPPED</p>
+                            <p>→ DELIVERED</p>
+
+
+                        {% elif order[2] == "PROCESSING" %}
+
+                            <p>✓ PLACED</p>
+                            <p>✓ PROCESSING - CURRENT</p>
+                            <p>→ SHIPPED</p>
+                            <p>→ DELIVERED</p>
+
+
+                        {% elif order[2] == "SHIPPED" %}
+
+                            <p>✓ PLACED</p>
+                            <p>✓ PROCESSING</p>
+                            <p>✓ SHIPPED - CURRENT</p>
+                            <p>→ DELIVERED</p>
+
+
+                        {% elif order[2] == "DELIVERED" %}
+
+                            <p>✓ PLACED</p>
+                            <p>✓ PROCESSING</p>
+                            <p>✓ SHIPPED</p>
+                            <p>✓ DELIVERED - CURRENT</p>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    <p class="order-info">
+                        <strong>Order Date:</strong>
+                        {{ order[3] }}
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <div class="empty-orders">
+
+                <h2>You have no orders yet.</h2>
+
+                <p>Your orders will appear here after you make a purchase.</p>
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="bottom-links">
+
+            <a href="/products">
+                Continue Shopping
+            </a>
+
+            <a href="/cart">
+                🛒 View Cart
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logged Out - ShopEase</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .logout-card {
+            width: 420px;
+            padding: 40px;
+            text-align: center;
+            background: #f5f3ff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #6c63ff;
+            color: white;
+            font-size: 32px;
+        }
+
+        h1 {
+            color: #4b3f72;
+            margin-bottom: 12px;
+            font-size: 27px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 28px;
+            font-size: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 26px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #574fd6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="logout-card">
+
+        <div class="icon">
+            ✓
+        </div>
+
+        <h1>Logged Out Successfully</h1>
+
+        <p>
+            Thank you for using ShopEase.
+        </p>
+
+        <a href="/login" class="btn">
+            Login Again
+        </a>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - Order Success</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px;
+        }
+
+        .container {
+            width: 560px;
+
+            background: #f8f5ff;
+
+            padding: 45px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,.25);
+
+            text-align: center;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 48px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            color: #283f9f;
+        }
+
+        .tagline {
+            margin-top: 6px;
+
+            font-size: 13px;
+
+            letter-spacing: 3px;
+
+            color: #7650c7;
+
+            margin-bottom: 30px;
+        }
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+
+            margin: 0 auto 20px;
+
+            background: #e6f7ed;
+
+            border: 2px solid #b7e4c7;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 44px;
+
+            color: #2e8b57;
+        }
+
+        h1 {
+            color: #4b3f72;
+
+            font-size: 30px;
+
+            margin-bottom: 12px;
+        }
+
+        .message {
+            color: #666;
+
+            font-size: 16px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+        .buttons a {
+            display: block;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            transition: .3s;
+        }
+
+        .buttons a:hover {
+            transform: translateY(-2px);
+
+            opacity: .9;
+        }
+
+        .secondary {
+            background: #e5ddff !important;
+
+            color: #5b4bb7 !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="brand-name">
+        ShopEase
+    </div>
+
+    <div class="tagline">
+        Shop More • Worry Less
+    </div>
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <h1>Order Created Successfully</h1>
+
+    <p class="message">
+        Your order has been placed successfully.
+        Thank you for shopping with ShopEase!
+    </p>
+
+    <div class="buttons">
+
+        <a href="/my-orders">
+            📦 View My Orders
+        </a>
+
+        <a href="/products">
+            🛍️ Continue Shopping
+        </a>
+
+        <a href="/dashboard" class="secondary">
+            🏠 Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

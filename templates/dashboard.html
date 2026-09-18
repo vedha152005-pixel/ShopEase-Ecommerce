@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEase - User Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-container {
+            width: 600px;
+            background: #f8f5ff;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        /* =========================
+           SHOP EASE BRAND
+           ========================= */
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 52px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #283f9f;
+        }
+
+        .tagline {
+            margin-top: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: #7650c7;
+        }
+
+        /* =========================
+           WELCOME SECTION
+           ========================= */
+
+        h1 {
+            color: #4b3f72;
+            margin-bottom: 10px;
+            font-size: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .welcome-text {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        /* =========================
+           MENU BUTTONS
+           ========================= */
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* =========================
+           LOGOUT
+           ========================= */
+
+        .logout {
+            margin-top: 25px;
+        }
+
+        .logout a {
+            color: #d9534f;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logout a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- SHOP EASE BRAND -->
+
+        <div class="logo-section">
+
+            <div class="brand-name">
+                ShopEase
+            </div>
+
+            <div class="tagline">
+                Shop More • Worry Less
+            </div>
+
+        </div>
+
+
+        <!-- WELCOME -->
+
+        <h1>
+            Welcome to ShopEase
+        </h1>
+
+        <h2>
+            Welcome, {{ name }}!
+        </h2>
+
+        <p class="welcome-text">
+            You are successfully logged in.
+        </p>
+
+
+        <!-- MENU -->
+
+        <div class="menu">
+
+            <a href="/products">
+                🛍️ Continue Shopping
+            </a>
+
+            <a href="/cart">
+                🛒 View Cart
+            </a>
+
+            <a href="/my-orders">
+                📦 My Orders
+            </a>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <div class="logout">
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
