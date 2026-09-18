@@ -22,7 +22,7 @@ mysql = MySQL(app)
 
 @app.route("/")
 def home():
-    return "E-Commerce Application"
+    return render_template("login.html")
 
 
 # =========================
