@@ -10,14 +10,16 @@ load_dotenv()
 
 app.secret_key = os.environ.get("SECRET_KEY")
 
+
 # =========================
-# MySQL Configuration
+# MySQL / TiDB Configuration
 # =========================
 
-app.config['MYSQL_HOST'] = os.environ.get("MYSQL_HOST")
-app.config['MYSQL_USER'] = os.environ.get("MYSQL_USER")
-app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_PASSWORD")
-app.config['MYSQL_DB'] = os.environ.get("MYSQL_DB")
+app.config["MYSQL_HOST"] = os.environ.get("MYSQL_HOST")
+app.config["MYSQL_USER"] = os.environ.get("MYSQL_USER")
+app.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
+app.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
+app.config["MYSQL_PORT"] = int(os.environ.get("MYSQL_PORT", "3306"))
 
 
 # =========================
@@ -35,13 +37,23 @@ class MySQL:
 
         if "db" not in g:
 
+            ca_file = os.path.join(
+                os.path.dirname(__file__),
+                "isrgrootx1.pem"
+            )
+
             g.db = pymysql.connect(
                 host=self.app.config["MYSQL_HOST"],
                 user=self.app.config["MYSQL_USER"],
                 password=self.app.config["MYSQL_PASSWORD"],
                 database=self.app.config["MYSQL_DB"],
+                port=self.app.config["MYSQL_PORT"],
                 cursorclass=pymysql.cursors.Cursor,
-                autocommit=False
+                autocommit=False,
+                ssl={
+                    "ca": ca_file,
+                    "check_hostname": True
+                }
             )
 
         return g.db
@@ -63,7 +75,6 @@ mysql = MySQL(app)
 
 @app.route("/")
 def home():
-
     return render_template("login.html")
 
 
@@ -179,11 +190,9 @@ def login():
 def admin():
 
     if "user_id" not in session:
-
         return "Please login first"
 
     if session.get("role") != "ADMIN":
-
         return "Access Denied"
 
     return render_template(
@@ -201,11 +210,9 @@ def admin():
 def add_product():
 
     if "user_id" not in session:
-
         return redirect("/login")
 
     if session.get("role") != "ADMIN":
-
         return "Access Denied"
 
     if request.method == "POST":
@@ -252,11 +259,9 @@ def add_product():
 def edit_product(id):
 
     if "user_id" not in session:
-
         return redirect("/login")
 
     if session.get("role") != "ADMIN":
-
         return "Access Denied"
 
     cursor = mysql.connection.cursor()
@@ -321,11 +326,9 @@ def edit_product(id):
 def delete_product(id):
 
     if "user_id" not in session:
-
         return redirect("/login")
 
     if session.get("role") != "ADMIN":
-
         return "Access Denied"
 
     cursor = mysql.connection.cursor()
@@ -350,14 +353,11 @@ def delete_product(id):
 def add_to_cart(product_id):
 
     if "user_id" not in session:
-
         return "Please login first"
 
     user_id = session["user_id"]
 
     cursor = mysql.connection.cursor()
-
-    # Get product stock
 
     cursor.execute(
         """
@@ -373,12 +373,9 @@ def add_to_cart(product_id):
     if not product:
 
         cursor.close()
-
         return "Product Not Found"
 
     stock = product[0]
-
-    # Check existing cart item
 
     cursor.execute(
         """
@@ -396,12 +393,9 @@ def add_to_cart(product_id):
 
         current_quantity = existing_item[0]
 
-        # Prevent quantity from exceeding stock
-
         if current_quantity >= stock:
 
             cursor.close()
-
             return "Stock Limit Reached"
 
         cursor.execute(
@@ -416,12 +410,9 @@ def add_to_cart(product_id):
 
     else:
 
-        # Product must have stock
-
         if stock <= 0:
 
             cursor.close()
-
             return "Out of Stock"
 
         cursor.execute(
@@ -448,7 +439,6 @@ def add_to_cart(product_id):
 def view_cart():
 
     if "user_id" not in session:
-
         return "Please login first"
 
     user_id = session["user_id"]
@@ -488,7 +478,6 @@ def view_cart():
 def increase_cart(cart_id):
 
     if "user_id" not in session:
-
         return redirect("/login")
 
     cursor = mysql.connection.cursor()
@@ -518,7 +507,6 @@ def increase_cart(cart_id):
 def decrease_cart(cart_id):
 
     if "user_id" not in session:
-
         return redirect("/login")
 
     cursor = mysql.connection.cursor()
@@ -549,7 +537,6 @@ def decrease_cart(cart_id):
 def remove_from_cart(cart_id):
 
     if "user_id" not in session:
-
         return redirect("/login")
 
     cursor = mysql.connection.cursor()
@@ -578,7 +565,6 @@ def remove_from_cart(cart_id):
 def checkout():
 
     if "user_id" not in session:
-
         return "Please login first"
 
     user_id = session["user_id"]
@@ -617,14 +603,11 @@ def checkout():
 def place_order():
 
     if "user_id" not in session:
-
         return "Please login first"
 
     user_id = session["user_id"]
 
     cursor = mysql.connection.cursor()
-
-    # Get cart items
 
     cursor.execute(
         """
@@ -644,10 +627,7 @@ def place_order():
     if not cart_items:
 
         cursor.close()
-
         return "Your cart is empty"
-
-    # Check product stock
 
     for item in cart_items:
 
@@ -664,24 +644,17 @@ def place_order():
         if stock is None:
 
             cursor.close()
-
             return "Product not found"
 
         if stock[0] < quantity:
 
             cursor.close()
-
             return "Not enough stock available"
-
-    # Calculate total amount
 
     total_amount = 0
 
     for item in cart_items:
-
         total_amount += item[1] * item[2]
-
-    # Create order
 
     cursor.execute(
         """
@@ -694,12 +667,7 @@ def place_order():
 
     mysql.connection.commit()
 
-    # Get newly created order ID
-
     order_id = cursor.lastrowid
-
-    # Store products in order_items
-    # Reduce product stock
 
     for item in cart_items:
 
@@ -732,8 +700,6 @@ def place_order():
 
     mysql.connection.commit()
 
-    # Clear cart
-
     cursor.execute(
         "DELETE FROM cart WHERE user_id = %s",
         (user_id,)
@@ -754,7 +720,6 @@ def place_order():
 def my_orders():
 
     if "user_id" not in session:
-
         return "Please login first"
 
     user_id = session["user_id"]
@@ -792,11 +757,9 @@ def my_orders():
 def admin_orders():
 
     if "user_id" not in session:
-
         return "Please login first"
 
     if session.get("role") != "ADMIN":
-
         return "Access Denied"
 
     cursor = mysql.connection.cursor()
@@ -837,11 +800,9 @@ def admin_orders():
 def update_order_status(order_id):
 
     if "user_id" not in session:
-
         return "Please login first"
 
     if session.get("role") != "ADMIN":
-
         return "Access Denied"
 
     status = request.form["status"]
@@ -872,7 +833,6 @@ def update_order_status(order_id):
 def order_details(order_id):
 
     if "user_id" not in session:
-
         return redirect("/login")
 
     user_id = session["user_id"]
@@ -927,3 +887,5 @@ def logout():
 if __name__ == "__main__":
 
     app.run(debug=False)
+
+
